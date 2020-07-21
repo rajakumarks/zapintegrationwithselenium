@@ -32,6 +32,7 @@ public class ZapSecurityTest {
     private Spider zapSpider;
     private WebDriver driver;
     private WebSiteNavigation siteNavigation;
+    private AlphaNavigation alpha;
     // Provide scan policy names
     private final static String[] policyNames =
             {"directory-browsing","cross-site-scripting",
@@ -51,8 +52,7 @@ public class ZapSecurityTest {
      * Method to configure ZAP scanner, API client and perform User Registration
      */
     @Before
-    public void setUp()
-    {
+    public void setUp() throws Exception {
         // Configure ZAP Scanner
         zapScanner = new ZAProxyScanner(ZAP_PROXYHOST, ZAP_PROXYPORT, ZAP_APIKEY);
         // Start new session
@@ -63,9 +63,12 @@ public class ZapSecurityTest {
         log.info("Created client to ZAP API");
         // Create driver object
         driver = BrowserDriverFactory.createChromeDriver(createZapProxyConfiguration(), BROWSER_DRIVER_PATH);
+        //driver = BrowserDriverFactory.createChromeDriver(BROWSER_DRIVER_PATH);
         siteNavigation = new WebSiteNavigation(driver);
         // First test the "Register a new user"
         siteNavigation.registerNewUser();
+        //alpha = new AlphaNavigation(driver);
+        //alpha.registerNewUser();
     }
     /*
      * Method to close the driver connection
@@ -273,8 +276,7 @@ public class ZapSecurityTest {
      * log the found alerts and assert the count of alerts
      */
     @Test
-    public void testVulnerabilitiesAfterLogin()
-    {
+    public void testVulnerabilitiesAfterLogin() {
         siteNavigation.loginAsUser();
         siteNavigation.navigateAfterLogin();
         // Using ZAP Spider

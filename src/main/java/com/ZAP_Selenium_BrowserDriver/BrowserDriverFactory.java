@@ -13,9 +13,24 @@ public class BrowserDriverFactory {
     public static WebDriver createChromeDriver(Proxy proxy, String path) {
 // Set proxy in the chrome browser
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability("proxy", proxy);
+        //capabilities.setCapability("proxy", proxy);
         // Set system property for chrome driver with the path
         System.setProperty("webdriver.chrome.driver", path);
+        capabilities.setCapability("binary.path", path);
+        capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        ChromeOptions options = new ChromeOptions();
+        options.merge(capabilities);
+        return new ChromeDriver(options);
+    }
+    public static WebDriver createChromeDriver(String path) {
+// Set proxy in the chrome browser
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        //capabilities.setCapability("proxy", proxy);
+        // Set system property for chrome driver with the path
+        System.setProperty("webdriver.chrome.driver", path);
+        capabilities.setCapability("binary.path", path);
+        capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         ChromeOptions options = new ChromeOptions();
         options.merge(capabilities);

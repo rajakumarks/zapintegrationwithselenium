@@ -10,8 +10,8 @@ public class WebSiteNavigation {
      * Necessary information is provided about AUT (Test application - BodgeIt Store)
      * URL, Logout_URL, Username, Password to be used for registration
      */
-    final static String BASE_URL = "http://localhost:8081/bodgeit/";
-    final static String LOGOUT_URL = "http://localhost:8081/bodgeit/logout.jsp";
+    final static String BASE_URL = "http://localhost:8080/bodgeit/";
+    final static String LOGOUT_URL = "http://localhost:8080/bodgeit/logout.jsp";
     final static String USERNAME = "test101@demo.com";
     final static String PASSWORD = "demotest";
     /*
